@@ -1,25 +1,24 @@
-# {{PROBLEM}} Method Design Recipe
-
-Copy this into a `recipe.md` in your project and fill it out.
+# {{PROBLEM}} grammar_improver Method Design
 
 ## 1. Describe the Problem
 
 _Put or write the user story here. Add any clarifying notes you might have._
+
+> As a user
+> So that I can improve my grammar
+> I want to verify that a text starts with a capital letter and ends with a suitable sentence-ending punctuation mark.
 
 ## 2. Design the Method Signature
 
 _Include the name of the method, its parameters, return value, and side effects._
 
 ```ruby
-# EXAMPLE
 
-# `extract_upper` extracts uppercase words from a string
-uppercase_words = extract_uppercase(mixed_words)
+boolean_return = grammar_improver(text)
 
-mixed_words: a string (e.g. "hello WORLD")
-uppercase_words: a list of strings (e.g. ["WORLD"])
+text = a string (e.g. "Grammatically correct.")
+boolean_return = a boolean (e.g. true)
 
-# The method doesn't print anything or have any other side-effects
 ```
 
 ## 3. Create Examples as Tests
@@ -27,15 +26,21 @@ uppercase_words: a list of strings (e.g. ["WORLD"])
 _Make a list of examples of what the method will take and return._
 
 ```ruby
-# EXAMPLE
 
-extract_uppercase("hello WORLD") => ["WORLD"]
-extract_uppercase("HELLO WORLD") => ["HELLO", "WORLD"]
-extract_uppercase("hello world") => []
-extract_uppercase("hello WoRLD") => []
-extract_uppercase("hello WORLD!") => ["WORLD"]
-extract_uppercase("") => []
-extract_uppercase(nil) throws an error
+grammar_improver("") => false
+grammar_improver("Grammatically correct.") => true
+grammar_improver("Grammatically correct!") => true
+grammar_improver("Grammatically correct?") => true
+grammar_improver("Grammatically correct/") => false
+grammar_improver("grammatically correct") => false
+grammar_improver("grammatically correct.") => false
+grammar_improver("grammatically correct!") => false
+grammar_improver("grammatically correct?") => false
+grammar_improver("grammatically correct/") => false
+grammar_improver() throws an error "Input must be a string"
+grammar_improver() throws an error "Input must be a string"
+
+
 ```
 
 _Encode each example as a test. You can add to the above list as you go._
