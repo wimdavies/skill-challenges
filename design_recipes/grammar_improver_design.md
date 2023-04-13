@@ -38,7 +38,7 @@ grammar_improver("grammatically correct!") => false
 grammar_improver("grammatically correct?") => false
 grammar_improver("grammatically correct/") => false
 grammar_improver() throws an error "Input must be a string"
-grammar_improver() throws an error "Input must be a string"
+grammar_improver(7) throws an error "Input must be a string"
 
 
 ```
