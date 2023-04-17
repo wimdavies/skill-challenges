@@ -1,6 +1,7 @@
 class GrammarStats
   def initialize
     @texts = []
+    @results = []
   end
 
   def check(text)
@@ -8,32 +9,22 @@ class GrammarStats
     @texts << text
     start_cap = (text[0] == text[0].upcase)
     valid_endings = [".", "?", "!"]
-      if start_cap && (valid_endings.include? text[-1])
-        true
-      else
-        false
-      end
+    if start_cap && (valid_endings.include? text[-1])
+      @results << true 
+      true
+    else
+      @results << false 
+      false
+    end
   end
-
-  # text is a string
-    # Returns true or false depending on whether the text begins with a capital
-    # letter and ends with a sentence-ending punctuation mark.
 
   def percentage_good
     fail "No texts checked yet" if @texts.empty?
-    
-    results = []
-    @texts.each do |text|
-      results << check(text)
-    end
-    if results.all? true
-      100
-    else
-      0
-    end
-  
-
-    # Returns as an integer the percentage of texts checked so far that passed
-    # the check defined in the `check` method. The number 55 represents 55%.
+    truth_count = 0 
+    result_length = @results.length 
+    @results.each {|result| truth_count += 1 if result == true } 
+    (truth_count / result_length.to_f) * 100
   end
 end
+
+

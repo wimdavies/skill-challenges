@@ -44,14 +44,18 @@ RSpec.describe GrammarStats do
       new_stats.check("hawaii")
       expect(new_stats.percentage_good).to eq 0
     end 
-    
+
     it "returns 100 when all texts have returned true" do 
       new_stats = GrammarStats.new
       new_stats.check("Hawaii.")
       expect(new_stats.percentage_good).to eq 100
     end 
+
+    it "returns 50 when half the texts have returned true" do 
+      new_stats = GrammarStats.new
+      new_stats.check("Hawaii.")
+      new_stats.check("Hawaii")
+      expect(new_stats.percentage_good).to eq 50
+    end 
   end 
-
-
-
 end
