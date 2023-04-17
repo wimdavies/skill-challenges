@@ -3,10 +3,20 @@ class GrammarStats
     # ...
   end
 
-  def check(text) # text is a string
+  def check(text)
+    fail "Text string must not be empty" if text.empty?
+    start_cap = (text[0] == text[0].upcase)
+    valid_endings = [".", "?", "!"]
+      if start_cap && (valid_endings.include? text[-1])
+        true
+      else
+        false
+      end
+  end
+
+  # text is a string
     # Returns true or false depending on whether the text begins with a capital
     # letter and ends with a sentence-ending punctuation mark.
-  end
 
   def percentage_good
     # Returns as an integer the percentage of texts checked so far that passed
