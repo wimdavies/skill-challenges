@@ -21,9 +21,17 @@ class GrammarStats
 
   def percentage_good
     fail "No texts checked yet" if @texts.empty?
-    0
-
-
+    
+    results = []
+    @texts.each do |text|
+      results << check(text)
+    end
+    if results.all? true
+      100
+    else
+      0
+    end
+  
 
     # Returns as an integer the percentage of texts checked so far that passed
     # the check defined in the `check` method. The number 55 represents 55%.
