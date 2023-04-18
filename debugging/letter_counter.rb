@@ -7,18 +7,16 @@ class LetterCounter
     counter = Hash.new(0)
     most_common = nil
     most_common_count = 0
-
-    @text.chars.each do |char|
+    @text.downcase.chars.each do |char|
       next unless is_letter?(char)
       counter[char] += 1
-      
+      # binding.irb
       if counter[char] > most_common_count
         most_common = char
-        most_common_count += counter[char]
+        most_common_count += 1
       end
-    
+    # binding.irb
     end
-
     return [most_common_count, most_common]
   end
 
@@ -30,7 +28,7 @@ class LetterCounter
   end
 end
 
-counter = LetterCounter.new("Digital Punk")
+counter = LetterCounter.new("Amaazon Prime")
 p counter.calculate_most_common
 
 # Intended output:
