@@ -12,27 +12,20 @@ _Include the initializer and public methods with all parameters and return value
 
 ```ruby
 
-
-
-```
-
-```ruby
-# EXAMPLE
-
-class Reminder
-  def initialize(name) # name is a string
-    # ...
+class MusicTracker
+  def initialize
+    @tracks # tracks is a list of tracks, as an array
+  end
+  
+  def add(track) # track is a string
+    # returns nothing
   end
 
-  def remind_me_to(task) # task is a string
-    # No return value
-  end
-
-  def remind()
-    # Throws an exception if no task is set
-    # Otherwise, returns a string reminding the user to do the task
+  def list
+    # returns list of tracks as an array
   end
 end
+
 ```
 
 ## 3. Create Examples as Tests
@@ -41,27 +34,29 @@ _Make a list of examples of how the class will behave in different situations._
 
 ```ruby
 
-# 1
+# 1 
+my_tracks = MusicTracker.new
+my_tracks.add("Track_1")
+my_tracks.list # => ["Track_1"]
 
+# 2 
+my_tracks = MusicTracker.new
+my_tracks.add("Track_1")
+my_tracks.add("Track_2")
+my_tracks.list # => ["Track_1, Track_2"]
 
-```
+# 3 
+my_tracks = MusicTracker.new
+my_tracks.add("") # => throws an error
 
-```ruby
-# EXAMPLE
+# 4
+my_tracks = MusicTracker.new
+my_tracks.list # => []
 
-# 1
-reminder = Reminder("Kay")
-reminder.remind_me_to("Walk the dog")
-reminder.remind() # => "Walk the dog, Kay!"
+# 5
+my_tracks = MusicTracker.new
+my_tracks.add() # => throws an error
 
-# 2
-reminder = Reminder("Kay")
-reminder.remind() # fails with "No task set."
-
-# 3
-reminder = Reminder("Kay")
-reminder.remind_me_to("")
-reminder.remind() # => ", Kay!"
 ```
 
 _Encode each example as a test. You can add to the above list as you go._
