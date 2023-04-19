@@ -130,7 +130,47 @@ diary_entry = DiaryEntry.new("", "")
 diary_entry.title #=> ""
 diary_entry.contents #=> ""
 
-# 21 #reading_time returns reading time
+# 21 #reading_time returns reading time (unit test)
 diary_entry = DiaryEntry.new("my_title", "one two")
 diary_entry.reading_time(1) #=> 2
+
+# 22 #reading_time returns time of 0 for empty contents (unit test)
+diary_entry = DiaryEntry.new("my_title", "")
+diary_entry.reading_time(1) #=> 0
+
+# 23 #reading_time fails when wpm is zero
+diary_entry = DiaryEntry.new("my_title", "")
+my_diary.reading_time(0) # => throws error
+
+# 24 #reading_chunk returns empty string when contents is empty
+diary_entry = DiaryEntry.new("my_title", "")
+my_diary.reading_chunk(1, 1) # => ""
+
+# 25 #reading_chunk returns entire contents when contents is fully readable
+diary_entry = DiaryEntry.new("my_title", "one")
+my_diary.reading_chunk(1, 1) # => "one"
+
+# 26 #reading_chunk returns first chunk when contents is not fully readable
+diary_entry = DiaryEntry.new("my_title", "one two")
+my_diary.reading_chunk(1, 1) # => "one"
+
+# 27 #reading_chunk returns remaining chunk on second call when contents is not fully readable 
+diary_entry = DiaryEntry.new("my_title", "one two")
+my_diary.reading_chunk(1, 1)
+my_diary.reading_chunk(1, 1) # => "two"
+
+# 28 #reading_chunk restarts with first chunk on third call when contents is not fully readable
+diary_entry = DiaryEntry.new("my_title", "one two")
+my_diary.reading_chunk(1, 1)
+my_diary.reading_chunk(1, 1) 
+my_diary.reading_chunk(1, 1) # => "one"
+
+# 29 #reading_chunk fails when wpm is 0
+diary_entry = DiaryEntry.new("my_title", "one two")
+my_diary.reading_chunk(0, 1) # => throws an error "WPM and minutes must both be greater than 0"
+
+# 30 #reading_chunk fails when minutes is 0
+diary_entry = DiaryEntry.new("my_title", "one two")
+my_diary.reading_chunk(1, 0) # => throws an error
+
 ```
