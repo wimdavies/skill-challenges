@@ -53,7 +53,7 @@ RSpec.describe "integration" do
     end
   end
 
-  decribe "#reading_time" do
+  describe "#reading_time" do
     xit "return reading time for a single entry" do
       my_diary = Diary.new
       first_entry = DiaryEntry.new("my_title", "one two three")
