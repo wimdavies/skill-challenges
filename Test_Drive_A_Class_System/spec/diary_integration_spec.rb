@@ -88,13 +88,66 @@ RSpec.describe "integration" do
   end
 
   describe "#find_best_entry_for_reading_time" do
-    context "returns single best entry" do
+    context "returns single best entry when" do
       xit "is given one valid entry" do
         my_diary = Diary.new
         first_entry = DiaryEntry.new("my_title", "one two")
         my_diary.add(first_entry)
         result = my_diary.find_best_entry_for_reading_time(1, 2)
         expect(result).to eq first_entry
+      end
+      
+      xit "is given multiple valid entries" do
+        my_diary = Diary.new
+        first_entry = DiaryEntry.new("my_title", "one two")
+        second_entry = DiaryEntry.new("my_title", "three")
+        my_diary.add(first_entry)
+        my_diary.add(second_entry)
+        result = my_diary.find_best_entry_for_reading_time(1, 2)
+        expect(result).to eq first_entry
+      end
+
+      xit "is given multiple entries, one of which is valid" do
+        my_diary = Diary.new
+        first_entry = DiaryEntry.new("my_title", "one two")
+        second_entry = DiaryEntry.new("my_title", "one two three")
+        my_diary.add(first_entry)
+        my_diary.add(second_entry)
+        result = my_diary.find_best_entry_for_reading_time(1, 2)
+        expect(result).to eq first_entry
+      end
+    end
+    
+    context "no valid entries" do
+      xit "returns a message to user" do
+        my_diary = Diary.new
+        first_entry = DiaryEntry.new("my_title", "one two")
+        second_entry = DiaryEntry.new("my_title", "one two three")
+        my_diary.add(first_entry)
+        my_diary.add(second_entry)
+        result = my_diary.find_best_entry_for_reading_time(1, 1)
+        expect(result).to eq "There are no entries that can be read in this time."
+      end
+    end
+
+    context "when multiple 'best' entries exist" do
+      xit "returns the first best entry" do
+        my_diary = Diary.new
+        first_entry = DiaryEntry.new("my_title", "one two")
+        second_entry = DiaryEntry.new("my_title", "three four")
+        my_diary.add(first_entry)
+        my_diary.add(second_entry)
+        result = my_diary.find_best_entry_for_reading_time(1, 2)
+        expect(result).to eq first_entry
+      end
+    end
+
+    context "when wpm is 0" do
+      xit "fails" do
+        my_diary = Diary.new
+        first_entry = DiaryEntry.new("my_title", "one two")
+        my_diary.add(first_entry)
+        expect { my_diary.find_best_entry_for_reading_time(0, 2) }.to raise_error "WPM must be greater than zero."
       end
     end
   end

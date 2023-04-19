@@ -125,6 +125,7 @@ diary_entry = DiaryEntry.new("my_title", "my_contents")
 diary_entry.title #=> "my_title"
 diary_entry.contents #=> "my_contents"
 
+# chose not to encode
 # 20 #title & #contents returns empty title and contents(unit test)
 diary_entry = DiaryEntry.new("", "")
 diary_entry.title #=> ""
@@ -134,6 +135,7 @@ diary_entry.contents #=> ""
 diary_entry = DiaryEntry.new("my_title", "one two")
 diary_entry.reading_time(1) #=> 2
 
+# chose not to encode
 # 22 #reading_time returns time of 0 for empty contents (unit test)
 diary_entry = DiaryEntry.new("my_title", "")
 diary_entry.reading_time(1) #=> 0
@@ -142,6 +144,7 @@ diary_entry.reading_time(1) #=> 0
 diary_entry = DiaryEntry.new("my_title", "")
 my_diary.reading_time(0) # => throws error
 
+# chose not to encode
 # 24 #reading_chunk returns empty string when contents is empty
 diary_entry = DiaryEntry.new("my_title", "")
 my_diary.reading_chunk(1, 1) # => ""
