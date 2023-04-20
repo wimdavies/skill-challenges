@@ -30,6 +30,7 @@ class Diary
   end
 
   def find_best_entry_for_reading_time(wpm, minutes)
+    fail "WPM must be greater than 0" if wpm < 1
     valid_entries = []
     # replace longform entry.reading_time with class method once implemented
     @entries.each do |entry|
@@ -38,14 +39,10 @@ class Diary
       end
     end
 
-    valid_entries.max_by { |entry| (entry.count_words / wpm.to_f).ceil }
-
-    # `wpm` is an integer representing the number of words the user can read
-    # per minute.
-    # `minutes` is an integer representing the number of minutes the user
-    # has to read.
-    # Returns an instance of diary entry representing the entry that is closest
-    # to, but not over, the length that the user could read in the minutes they
-    # have available given their reading speed.
+    if valid_entries.empty?
+      "There are no entries that can be read in this time."
+    else
+      valid_entries.max_by { |entry| (entry.count_words / wpm.to_f).ceil }
+    end
   end
 end

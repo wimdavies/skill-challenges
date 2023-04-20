@@ -106,7 +106,7 @@ RSpec.describe "integration" do
         expect(result).to eq second_entry
       end
 
-      xit "is given multiple entries, one of which is valid" do
+      it "is given multiple entries, one of which is valid" do
         my_diary = Diary.new
         first_entry = DiaryEntry.new("my_title", "one two")
         second_entry = DiaryEntry.new("my_title", "one two three")
@@ -118,7 +118,7 @@ RSpec.describe "integration" do
     end
 
     context "no valid entries" do
-      xit "returns a message to user" do
+      it "returns a message to user" do
         my_diary = Diary.new
         first_entry = DiaryEntry.new("my_title", "one two")
         second_entry = DiaryEntry.new("my_title", "one two three")
@@ -130,7 +130,7 @@ RSpec.describe "integration" do
     end
 
     context "when multiple 'best' entries exist" do
-      xit "returns the first best entry" do
+      it "returns the first best entry" do
         my_diary = Diary.new
         first_entry = DiaryEntry.new("my_title", "one two")
         second_entry = DiaryEntry.new("my_title", "three four")
@@ -142,11 +142,11 @@ RSpec.describe "integration" do
     end
 
     context "when wpm is 0" do
-      xit "fails" do
+      it "fails" do
         my_diary = Diary.new
         first_entry = DiaryEntry.new("my_title", "one two")
         my_diary.add(first_entry)
-        expect { my_diary.find_best_entry_for_reading_time(0, 2) }.to raise_error "WPM must be greater than zero."
+        expect { my_diary.find_best_entry_for_reading_time(0, 2) }.to raise_error "WPM must be greater than 0"
       end
     end
   end
