@@ -8,14 +8,20 @@ class TodoList
   end
 
   def incomplete
-    @todos
+    @todos.select do |todo|
+      todo.done? == false
+    end
   end
 
   def complete
-    # Returns all complete todos
+    @todos.select do |todo|
+      todo.done? == true
+    end
   end
 
   def give_up!
-    # Marks all todos as complete
+    @todos.each do |todo|
+      todo.mark_done!
+    end  
   end
 end
