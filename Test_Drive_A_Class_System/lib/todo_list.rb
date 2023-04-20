@@ -1,5 +1,6 @@
 class TodoList
   def initialize
+    
   end
 
   def add(todo) # todo is an instance of Todo
@@ -7,7 +8,7 @@ class TodoList
   end
 
   def incomplete
-    # Returns all non-done todos
+    []
   end
 
   def complete
