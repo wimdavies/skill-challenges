@@ -18,23 +18,28 @@ class Diary
       total_words += entry.count_words
     end
     total_words
-    # Returns the number of words in all diary entries
-    # HINT: This method should make use of the `count_words` method on DiaryEntry.
   end
 
   def reading_time(wpm)
+    fail "WPM must be greater than 0" if wpm < 1
     total_time = 0
     @entries.each do |entry|
       total_time += (entry.count_words / wpm.to_f).ceil
     end
     total_time
-    # wpm is an integer representing
-    # the number of words the user can read per minute
-    # Returns an integer representing an estimate of the reading time in minutes
-    # if the user were to read all entries in the diary.
   end
 
   def find_best_entry_for_reading_time(wpm, minutes)
+    valid_entries = []
+    # replace longform entry.reading_time with class method once implemented
+    @entries.each do |entry|
+      if (entry.count_words / wpm.to_f).ceil <= minutes
+        valid_entries << entry
+      end
+    end
+
+    valid_entries.max_by { |entry| (entry.count_words / wpm.to_f).ceil }
+
     # `wpm` is an integer representing the number of words the user can read
     # per minute.
     # `minutes` is an integer representing the number of minutes the user
