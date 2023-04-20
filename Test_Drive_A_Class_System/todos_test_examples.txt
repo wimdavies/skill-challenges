@@ -1,0 +1,49 @@
+# 1 adds some todos and return non-done
+todo_list = TodoList.new
+todo_1 = Todo.new("Eat your greens")
+todo_2 = Todo.new("Do a barrel roll")
+todo_list.add(todo_1)
+todo_list.add(todo_2)
+todo_list.incomplete # => [todo_1, todo_2]
+
+# 2 unit test: TodoList is initially empty
+todo_list = TodoList.new
+todo_list.incomplete # => []
+
+# 3 mark some as done and return only incomplete using #done?
+todo_list = TodoList.new
+todo_1 = Todo.new("Eat your greens")
+todo_2 = Todo.new("Do a barrel roll")
+todo_list.add(todo_1)
+todo_list.add(todo_2)
+todo_1.mark_done!
+todo_list.incomplete # => [todo_2]
+
+
+# 4 mark some as done and return only complete using #done?
+todo_list = TodoList.new
+todo_1 = Todo.new("Eat your greens")
+todo_2 = Todo.new("Do a barrel roll")
+todo_list.add(todo_1)
+todo_list.add(todo_2)
+todo_1.mark_done!
+todo_list.complete # => [todo_1]
+
+# 5 use #give_up! to mark all complete and return all completed
+todo_list = TodoList.new
+todo_1 = Todo.new("Eat your greens")
+todo_2 = Todo.new("Do a barrel roll")
+todo_list.add(todo_1)
+todo_list.add(todo_2)
+todo_list.give_up!
+todo_list.complete # => [todo_1, todo_2]
+
+
+# 6 use #give_up! to mark all complete and return empty completed
+todo_list = TodoList.new
+todo_1 = Todo.new("Eat your greens")
+todo_2 = Todo.new("Do a barrel roll")
+todo_list.add(todo_1)
+todo_list.add(todo_2)
+todo_list.give_up!
+todo_list.incomplete # => []
