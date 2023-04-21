@@ -73,10 +73,6 @@ class DiaryEntry
     # returns total number of words in text
   end
 
-  def reading_time(wpm) # wpm is integer
-    # returns ceiling of time taken to read text
-  end
-
   def extract_phone_numbers 
     # returns any phone numbers from text, as strings
     # pushes into array ?
@@ -142,16 +138,105 @@ _Create examples of the classes being used together in different situations and
 combinations that reflect the ways in which the system will be used._
 
 ```ruby
-# EXAMPLE
+# > As a user
+# > So that I can record my experiences
+# > I want to keep a regular diary
 
-# Gets all tracks
-library = MusicLibrary.new
-track_1 = Track.new("Carte Blanche", "Veracocha")
-track_2 = Track.new("Synaesthesia", "The Thrillseekers")
-library.add(track_1)
-library.add(track_2)
-library.all # => [track_1, track_2]
+# > As a user
+# > So that I can reflect on my experiences
+# > I want to read my past diary entries
+
+# 1
+diary = Diary.new
+entry_1 = DiaryEntry.new("date_1", "contents_1")
+entry_2 = DiaryEntry.new("date_2", "contents_2")
+diary.add(entry_1)
+diary.add(entry_2)
+diary.list_diary_entries # => [entry_1, entry_2]
+
+
+# > As a user
+# > So that I can reflect on my experiences in my busy day
+# > I want to select diary entries to read based on 
+# how much time I have and my reading speed
+
+# 2 when an exactly-best entry exists
+diary = Diary.new
+reader = DiaryReader.new(2, diary)
+entry_1 = DiaryEntry.new("date_1", "one")
+entry_2 = DiaryEntry.new("date_2", "one two")
+entry_3 = DiaryEntry.new("date_3", "one two three")
+entry_4 = DiaryEntry.new("date_4", "one two three four")
+entry_5 = DiaryEntry.new("date_5", "one two three four five")
+diary.add(entry_1)
+diary.add(entry_2)
+diary.add(entry_3)
+diary.add(entry_4)
+diary.add(entry_5)
+reader.find_best_entry_to_read(2) # => entry_4
+
+# 3 when an not-exactly-best entry exists
+diary = Diary.new
+reader = DiaryReader.new(2, diary)
+entry_1 = DiaryEntry.new("date_1", "one")
+entry_2 = DiaryEntry.new("date_2", "one two")
+entry_3 = DiaryEntry.new("date_3", "one two three")
+entry_4 = DiaryEntry.new("date_4", "one two three four five")
+diary.add(entry_1)
+diary.add(entry_2)
+diary.add(entry_3)
+diary.add(entry_4)
+reader.find_best_entry_to_read(2) # => entry_3
+
+# 4 when no entry readable in time
+diary = Diary.new
+reader = DiaryReader.new(2, diary)
+entry_1 = DiaryEntry.new("date_1", "one two three four five")
+diary.add(entry_1)
+reader.find_best_entry_to_read(2) # => nil
+
+# 5 when no entries exist
+diary = Diary.new
+reader = DiaryReader.new(2, diary)
+reader.find_best_entry_to_read(1) # => nil
+
+# 6 when wpm invalid
+diary = Diary.new
+reader = DiaryReader.new(0, diary) # => throws an error "WPM must be greater than 0."
+
+# > As a user
+# > So that I can keep track of my tasks
+# > I want to keep a todo list along with my diary
+
+# 7 
+todo_list = TodoList.new
+todo_1 = Todo.new("Wash the dog")
+todo_2 = Todo.new("Wash the dishes")
+todo_list.add(todo_1)
+todo_list.add(todo_2)
+todo_list.list_todos # => [todo_1, todo_2]
+
+# > As a user
+# > So that I can keep track of my contacts
+# > I want to see a list of all of the mobile phone numbers # in all my diary entries
+
+# 8 
+diary = Diary.new
+phone_book = PhoneBook.new(diary)
+entry_1 = DiaryEntry.new("date_1", "Will is 07731505553")
+diary.add(entry_1)
+entry_2 = DiaryEntry.new("date_2", "Will is 07731505553, Dilbert is 07712345678, Phlange is 07777777777.")
+diary.add(entry_2)
+phone_book.update_contacts_from_diary
+phone_book.list_contacts # => [
+  "07731505553", 
+  "07712345678", 
+  "07777777777"
+  ]
+
 ```
+
+
 
 ## 4. Create Examples as Unit Tests
 
@@ -159,11 +244,13 @@ _Create examples, where appropriate, of the behaviour of each relevant class at
 a more granular level of detail._
 
 ```ruby
-# EXAMPLE
 
-# Constructs a track
-track = Track.new("Carte Blanche", "Veracocha")
-track.title # => "Carte Blanche"
+# empty Diary
+
+# DiaryEntry count_words
+
+# more as we go
+
 ```
 
 _Encode each example as a test. You can add to the above list as you go._
