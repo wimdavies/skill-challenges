@@ -49,7 +49,7 @@ class Diary
     # returns nothing
   end
 
-  def list_diary_entries
+  def list_entries
     # returns list of entries
   end
 end
@@ -147,12 +147,12 @@ combinations that reflect the ways in which the system will be used._
 # > I want to read my past diary entries
 
 # 1
-diary = Diary.new
-entry_1 = DiaryEntry.new("date_1", "contents_1")
-entry_2 = DiaryEntry.new("date_2", "contents_2")
-diary.add(entry_1)
-diary.add(entry_2)
-diary.list_diary_entries # => [entry_1, entry_2]
+# diary = Diary.new
+# entry_1 = DiaryEntry.new("date_1", "contents_1")
+# entry_2 = DiaryEntry.new("date_2", "contents_2")
+# diary.add(entry_1)
+# diary.add(entry_2)
+# diary.list_diary_entries # => [entry_1, entry_2]
 
 
 # > As a user
@@ -161,48 +161,48 @@ diary.list_diary_entries # => [entry_1, entry_2]
 # how much time I have and my reading speed
 
 # 2 when an exactly-best entry exists
-diary = Diary.new
-reader = DiaryReader.new(2, diary)
-entry_1 = DiaryEntry.new("date_1", "one")
-entry_2 = DiaryEntry.new("date_2", "one two")
-entry_3 = DiaryEntry.new("date_3", "one two three")
-entry_4 = DiaryEntry.new("date_4", "one two three four")
-entry_5 = DiaryEntry.new("date_5", "one two three four five")
-diary.add(entry_1)
-diary.add(entry_2)
-diary.add(entry_3)
-diary.add(entry_4)
-diary.add(entry_5)
-reader.find_best_entry_to_read(2) # => entry_4
+# diary = Diary.new
+# reader = DiaryReader.new(2, diary)
+# entry_1 = DiaryEntry.new("date_1", "one")
+# entry_2 = DiaryEntry.new("date_2", "one two")
+# entry_3 = DiaryEntry.new("date_3", "one two three")
+# entry_4 = DiaryEntry.new("date_4", "one two three four")
+# entry_5 = DiaryEntry.new("date_5", "one two three four five")
+# diary.add(entry_1)
+# diary.add(entry_2)
+# diary.add(entry_3)
+# diary.add(entry_4)
+# diary.add(entry_5)
+# reader.find_best_entry_to_read(2) # => entry_4
 
-# 3 when an not-exactly-best entry exists
-diary = Diary.new
-reader = DiaryReader.new(2, diary)
-entry_1 = DiaryEntry.new("date_1", "one")
-entry_2 = DiaryEntry.new("date_2", "one two")
-entry_3 = DiaryEntry.new("date_3", "one two three")
-entry_4 = DiaryEntry.new("date_4", "one two three four five")
-diary.add(entry_1)
-diary.add(entry_2)
-diary.add(entry_3)
-diary.add(entry_4)
-reader.find_best_entry_to_read(2) # => entry_3
+# # 3 when an not-exactly-best entry exists
+# diary = Diary.new
+# reader = DiaryReader.new(2, diary)
+# entry_1 = DiaryEntry.new("date_1", "one")
+# entry_2 = DiaryEntry.new("date_2", "one two")
+# entry_3 = DiaryEntry.new("date_3", "one two three")
+# # entry_4 = DiaryEntry.new("date_4", "one two three four five")
+# diary.add(entry_1)
+# diary.add(entry_2)
+# diary.add(entry_3)
+# diary.add(entry_4)
+# reader.find_best_entry_to_read(2) # => entry_3
 
-# 4 when no entry readable in time
-diary = Diary.new
-reader = DiaryReader.new(2, diary)
-entry_1 = DiaryEntry.new("date_1", "one two three four five")
-diary.add(entry_1)
-reader.find_best_entry_to_read(2) # => nil
+# # 4 when no entry readable in time
+# diary = Diary.new
+# reader = DiaryReader.new(2, diary)
+# entry_1 = DiaryEntry.new("date_1", "one two three four five")
+# diary.add(entry_1)
+# reader.find_best_entry_to_read(2) # => nil
 
-# 5 when no entries exist
-diary = Diary.new
-reader = DiaryReader.new(2, diary)
-reader.find_best_entry_to_read(1) # => nil
+# # 5 when no entries exist
+# diary = Diary.new
+# reader = DiaryReader.new(2, diary)
+# reader.find_best_entry_to_read(1) # => nil
 
-# 6 when wpm invalid
-diary = Diary.new
-reader = DiaryReader.new(0, diary) # => throws an error "WPM must be greater than 0."
+# # 6 when wpm invalid
+# diary = Diary.new
+# reader = DiaryReader.new(0, diary) # => throws an error "WPM must be greater than 0."
 
 # > As a user
 # > So that I can keep track of my tasks
@@ -221,22 +221,21 @@ todo_list.list_todos # => [todo_1, todo_2]
 # > I want to see a list of all of the mobile phone numbers # in all my diary entries
 
 # 8 
-diary = Diary.new
-phone_book = PhoneBook.new(diary)
-entry_1 = DiaryEntry.new("date_1", "Will is 07731505553")
-diary.add(entry_1)
-entry_2 = DiaryEntry.new("date_2", "Will is 07731505553, Dilbert is 07712345678, Phlange is 07777777777.")
-diary.add(entry_2)
-phone_book.update_contacts_from_diary
-phone_book.list_contacts # => [
-  "07731505553", 
-  "07712345678", 
-  "07777777777"
-  ]
-
+# diary = Diary.new
+# phone_book = PhoneBook.new(diary)
+# entry_1 = DiaryEntry.new("date_1", "Will is 07731505553")
+# diary.add(entry_1)
+# entry_2 = DiaryEntry.new("date_2", "Will is 07731505553, Dilbert is 07712345678, Phlange is 07777777777.")
+# diary.add(entry_2)
+# entry_3 = DiaryEntry.new("date_1", "Will lost his phone")
+# diary.add(entry_3)
+# phone_book.update_contacts_from_diary
+# phone_book.list_contacts # => [
+#   "07731505553", 
+#   "07712345678", 
+#   "07777777777"
+#   ]
 ```
-
-
 
 ## 4. Create Examples as Unit Tests
 
