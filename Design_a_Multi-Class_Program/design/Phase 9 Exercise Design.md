@@ -1,4 +1,4 @@
-# {{PROBLEM}} Multi-Class Planned Design Recipe
+# {{Diary, Todolist and Contacts}} Multi-Class Planned Design Recipe
 
 ## 1. Describe the Problem
 
@@ -34,39 +34,7 @@ _Consider diagramming out the classes and their relationships. Take care to
 focus on the details you see as important, not everything. The diagram below
 uses asciiflow.com but you could also use excalidraw.com, draw.io, or miro.com_
 
-```
-┌────────────────────────────┐
-│ Diary                      │         ┌──────────────────────────┐
-│                            │         │                          │
-│ ----------------           │         │ DiaryEntry               │
-│ @diary_entries             │         │ -------------            │
-│ @todo_list                 │         │ @text                    │
-│ @contacts                  │         │ -------------            │
-│ ----------------           │         │                          │
-│ - add(diary entry)         │         │ - read(entry text)       │
-│ - list(diary entries)      │         │ - count words            │
-│ - read_all(diary entries)  │         │ - reading time           │
-│ - select best entry to read│         │                          │
-│                            │         │                          │
-│ -add(Todo)                 │ ◄───────┤ - extract(mobiles)       │
-│ - list completed todos     │         │                          │
-│ - list incomplete todos    │         └──────────────────────────┘
-│ -list(contacts)            │   owns a list of
-└────────────────────────────┘
-        ▲   owns a list of
-        │
-┌───────┴─────────────────┐
-│ Todo                    │
-│ -------------           │
-│ @task                   │
-│ @doneness               │
-│ -----------             │
-│ - read task             │
-│ - mark as done          │
-│ - check doneness        │
-│                         │
-└─────────────────────────┘
-```
+> created diagram on Excalidraw
 
 _Also design the interface of each class in more detail._
 
