@@ -41,9 +41,7 @@ _Also design the interface of each class in more detail._
 ```ruby
 class Diary
   def initialize
-    @diary_entries = []
-    @todo_list = []
-    @contacts = []
+    @diary_entries # is an array
   end
 
   def add(diary_entry) # diary_entry is an instance of DiaryEntry
@@ -51,34 +49,23 @@ class Diary
     # returns nothing
   end
 
-  def read(diary_entry)
-    # returns text of the entry, as a string
-  end
-
   def list_diary_entries
     # returns list of entries
   end
-
-  def read_all
-    # returns text of all diary entries, as a string
-  end
-
-  def select_best_entry_for_reading_time(wpm, minutes) # both integers
-    # returns the longest diary entry that can be read fully 
-    # at the WPM in the available time
-  end
-
-  # design the interface that handles Todo and mobile interactions!
-
 end
 
 class DiaryEntry
-  def initialize(text) # text is a string
+  def initialize(date, text) # date, text both strings
+    @date = date
     @text = text
     # @mobiles = empty array ??
   end
 
-  def read
+  def read_date
+    # returns date as string
+  end
+
+  def read_text
     # returns text as string
   end
 
@@ -90,63 +77,61 @@ class DiaryEntry
     # returns ceiling of time taken to read text
   end
 
-  def extract_mobile_numbers 
-    # returns any mobile numbers from within entry, as strings
+  def extract_phone_numbers 
+    # returns any phone numbers from text, as strings
     # pushes into array ?
   end
 end
 
-Class Todo
-  def initialize(task) # task is a string
-    @task # task
-    @doneness # boolean
-  end
-
-  def read
-    # returns task 
-  end
-
-  def mark_done!
-    # sets doneness to true
-  end
-
-  def done?
-    # returns doneness
-  end
-
-end
-
-
-
-```
-
-
-```ruby
-class MusicLibrary
-  def initialize
-    # ...
-  end
-
-  def add(track) # track is an instance of Track
-    # Track gets added to the library
-    # Returns nothing
-  end
-
-  def all
-    # Returns a list of track objects
+class PhoneBook
+  def initialize(diary) # diary is an instance of Diary
+    @diary = diary
+    @contacts # is an array
   end
   
-  def search_by_title(keyword) # keyword is a string
-    # Returns a list of tracks with titles that include the keyword
+  def list_contacts
+    # returns list of contacts
+  end
+
+  def update_contacts_from_diary
+    # extracts contacts from Diary's DiaryEntry instances, 
+    # pushes them into contact list
   end
 end
 
-class Track
-  def initialize(title, artist) # title and artist are both strings
+class DiaryReader
+  def initialize(wpm, diary)
+    # wpm is integer representing num of words reader can 
+    # read in a minute
+    # diary is an instance of Diary
   end
 
-  def format
-    # Returns a string of the form "TITLE by ARTIST"
+  def find_best_entry_to_read(time) # time is integer minutes
+    # returns Diary's longest instance of DiaryEntry 
+    # that can be read in the available time and @wpm
+  end
+end
+
+class TodoList
+  def initialize
+    @todos # is an array
+  def 
+
+  def add(todo) # todo is an instance of Todo
+  end
+
+  def list_todos
+  # returns list of Todo instances
+  end
+end
+
+class Todo
+  def initialize(task) # task is a string
+    @task # task
+  end
+
+  def read_task
+    # returns task 
   end
 end
 ```
